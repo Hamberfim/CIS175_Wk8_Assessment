@@ -1,13 +1,25 @@
 package italian.beans;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+@Entity
 public class Product {
 	// Anthony Hamlin
-	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	private String productName;
 	private double pricePerUnit;
 	private int inStockQty;
 	private String category;
+	
+	@Autowired
+	private ProductContainerPackaging productcontainerpackaging;
 	
 	
 	public Product() {
@@ -19,6 +31,13 @@ public class Product {
 		super();
 		this.productName = productName;
 	}
+	
+	public Product(String productName, double pricePerUnit, int inStockQty, String category) {
+		this.productName = productName;
+		this.pricePerUnit = pricePerUnit;
+		this.inStockQty = inStockQty;
+		this.category = category;
+	}
 
 	public Product(long id, String productName, double pricePerUnit, int inStockQty, String category) {
 		super();
@@ -28,7 +47,7 @@ public class Product {
 		this.inStockQty = inStockQty;
 		this.category = category;
 	}
-	
+
 
 	public long getId() {
 		return id;
@@ -69,12 +88,21 @@ public class Product {
 	public void setCategory(String category) {
 		this.category = category;
 	}
+	
+	public ProductContainerPackaging getProductcontainerpackaging() {
+		return productcontainerpackaging;
+	}
+
+	public void setProductcontainerpackaging(ProductContainerPackaging productcontainerpackaging) {
+		this.productcontainerpackaging = productcontainerpackaging;
+	}
 
 	@Override
 	public String toString() {
 		return "Product [id=" + id + ", productName=" + productName + ", pricePerUnit=" + pricePerUnit + ", inStockQty="
-				+ inStockQty + ", category=" + category + "]";
+				+ inStockQty + ", category=" + category + ", productcontainerpackaging=" + productcontainerpackaging
+				+ "]";
 	}
-
+	
 
 }
